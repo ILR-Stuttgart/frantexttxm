@@ -3,8 +3,7 @@ FRANTEXT for TXM
 
 Tom Rainsford, ILR Stuttgart, May 2023
 
-1. Description
---------------
+# Description
 
 The files provided in this repository may be used to process XML
 files downloaded from the FRANTEXT platform in the following ways:
@@ -18,8 +17,7 @@ IMPORTANT NOTICE: This repository does **not** contain XML files
 from FRANTEXT. A subscription to FRANTEXT is required in order to obtain
 the source texts.
 
-2. Importing into TXM
----------------------
+# Importing into TXM
 
 1. Download and install TXM version 0.8.2
 2. Create a corpus in FRANTEXT containing the texts that you want to
@@ -36,8 +34,7 @@ using the "Exporter" function.
 5. Launch TXM and select `Import > XML-XTZ + CSV`.
 6. Select the directory you created in step 4 and launch the importer.
 
-3. Converting to Conll
-----------------------
+# Converting to Conll
 
 When the texts are imported, TXM creates a new XML-TXM file containing
 unique identifiers for each token. These can be found in 
@@ -58,8 +55,8 @@ the following command:
 java -cp <PATH>/frantexttxm/saxonb.jar net.sf.saxon.Transform <XML-TXM FILE> <PATH>/frantexttxm/conll/xml-txm_to_conll.xsl include-annotation=yes > <OUTPUT_FILE>
 ```
 
-Resources
----------
+# Resources
+
 FRANTEXT: [https://www.frantext.fr/](https://www.frantext.fr/)
 Saxon XSLT processor: [https://www.saxonica.com](https://www.saxonica.com)
 TXM: [https://txm.gitpages.huma-num.fr/textometrie/](https://txm.gitpages.huma-num.fr/textometrie/)
