@@ -62,7 +62,7 @@
             </xsl:choose>
         </xsl:variable>
         <!-- Tokenize the lemma attribute -->
-        <xsl:variable name="lemmas" select="tokenize($lemma, '\s+')"/>
+        <xsl:variable name="lemmas" select="tokenize(normalize-space($lemma), '\s+')"/>
         <!-- Store node as a variable before iterating strings -->
         <xsl:variable name="xwf" select="."/>
         <!-- Iterate over tokens -->
@@ -94,9 +94,9 @@
                         </xsl:when>
                         <!-- Alternate: mismatched lemma and token lengths -->
                         <xsl:otherwise>
-                            <!-- Use underscore and repeat lemma for all tokens.
+                            <!-- Use dot and repeat lemma for all tokens.
                             Add a star sign for non-final lemmas. -->
-                            <xsl:value-of select="string-join($lemmas, '_')"/>
+                            <xsl:value-of select="string-join($lemmas, '.')"/>
                             <xsl:if test="position() &lt; count($tokens)">
                                 <xsl:text>*</xsl:text>
                             </xsl:if>
