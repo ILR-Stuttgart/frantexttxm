@@ -34,6 +34,44 @@ using the "Exporter" function.
 5. Launch TXM and select `Import > XML-XTZ + CSV`.
 6. Select the directory you created in step 4 and launch the importer.
 
+## An important note on tokenization
+
+The original FRANTEXT tokenization is based on lexical units, and
+so FRANTEXT tokens may contain spaces, e.g. *parce que*, *Louis XIV*,
+or even *au fur et à mesure*.
+
+By default, the import XSL eliminates all tokens containing whitespace,
+modifying the `pos` and `lemma` tags as follows:
++ the single `pos` tag is copied to all tokens with an asterisk
+appended to the `pos` tag of all but the final word.
+    + For example, the token `parce que` tagged `CS` becomes two tokens:
+    `parce` tagged `CS*` and `que` tagged `CS`.
++ where possible, the `lemma` tag is also retokenized.
+    + For example, the token `parce que`, lemma `parce que` becomes two
+    tokens: the token `parce` with lemma `parce` and the token `que`
+    with lemma `que`.
++ where the `lemma` tag cannot be redistributed across the new tokens,
+the whitespace is replaced by a full stop and the tag is copied to
+all new tokens. As with the `pos` tag, an asterisk is appended to the
+lemma tag on all but the final token.
+    + For example, the token `pource que`, lemma `pour ce que` becomes
+    two tokens, a token `pource`, lemma `pour.ce.que*` and a second 
+    token `que`, lemma `pour.ce.que`.
+
+If you wish to retain the original FRANTEXT tokenization, simply
+modify the file
+[import/xsl/2-front/xml-frantext_to_xml-txm-xtz.xsl](https://github.com/ILR-Stuttgart/frantexttxm/blob/main/import/xsl/2-front/xml-frantext_to_xml-txm-xtz.xsl)
+before importing.
+
+Replace the line:
+```
+<xsl:param name="retokenize" select="'yes'"/>
+```
+with the line
+```
+<xsl:param name="retokenize" select="'no'"/>
+```
+
 # Converting to Conll
 
 When the texts are imported, TXM creates a new XML-TXM file containing
