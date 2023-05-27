@@ -111,7 +111,7 @@
 
     <!-- Copy everything templates -->
 
-    <xsl:template match="*">
+    <xsl:template match="*" mode="#all">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:apply-templates mode="#current"/>
@@ -122,7 +122,7 @@
         <xsl:copy/>
     </xsl:template>
 
-    <xsl:template match="text()">
+    <xsl:template match="text()" mode="#all">
         <xsl:copy/>
     </xsl:template>
 
